@@ -18,7 +18,12 @@
       </NFormItem>
 
       <div class="footer-form">
-        <NButton type="primary" attr-type="submit" :loading="isLoading" :disabled="isLoading">
+        <NButton
+          type="primary"
+          attr-type="submit"
+          :loading="isLoading"
+          :disabled="isLoading"
+        >
           Se connecter
         </NButton>
         <p>
@@ -32,8 +37,8 @@
 
 <script setup lang="ts">
 import { NAlert, NButton, NForm, NFormItem, NInput, NSpace } from 'naive-ui'
-import { RouterLink, useRouter } from 'vue-router'
 import { reactive, ref } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
 
 import { useAuthStore } from '@/store/auth.store'
 
@@ -57,7 +62,7 @@ const handleSignIn = async () => {
       password: form.motdepasse,
     })
     router.push('/')
-  } catch (error: any) {
+  } catch (error: unknown) {
     errorMessage.value =
       error?.response?.data?.message ?? 'Email ou mot de passe incorrect.'
   } finally {

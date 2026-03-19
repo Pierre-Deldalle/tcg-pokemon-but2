@@ -37,11 +37,11 @@
 
 <script setup lang="ts">
 import { NButton, NLayoutHeader, NSpace, NText } from 'naive-ui'
-import { RouterLink, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { RouterLink, useRouter } from 'vue-router'
 
-import { useAuthStore } from '@/store/auth.store'
 import { ROUTES } from '@/router'
+import { useAuthStore } from '@/store/auth.store'
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL as string
 

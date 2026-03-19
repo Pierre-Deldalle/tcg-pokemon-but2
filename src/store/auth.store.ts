@@ -1,10 +1,11 @@
 // src/store/auth.ts
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import { useApi } from '@/composables/useApi'
 import { useStorage } from '@/composables/useStorage'
 import type { User } from '@/types'
+
 import type { SignUpPayload } from './../types/auth'
 
 export interface SignInPayload {

@@ -13,7 +13,11 @@
         />
       </NFormItem>
       <NFormItem label="Email" required style="width: 100%">
-        <NInput v-model:value="email" type="text" placeholder="votre@email.com" />
+        <NInput
+          v-model:value="email"
+          type="text"
+          placeholder="votre@email.com"
+        />
       </NFormItem>
 
       <NFormItem label="Mot de passe" required style="width: 100%">
@@ -44,8 +48,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { NAlert, NButton, NForm, NFormItem, NInput, NSpace } from 'naive-ui'
+import { ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 
 import { useAuthStore } from '@/store/auth.store'
@@ -69,9 +73,10 @@ const handleSignUp = async () => {
       password: password.value,
     })
     router.push('/')
-  } catch (error: any) {
+  } catch (error: unknown) {
     errorMessage.value =
-      error?.response?.data?.message ?? "Une erreur est survenue lors de l'inscription."
+      error?.response?.data?.message ??
+      "Une erreur est survenue lors de l'inscription."
   } finally {
     isLoading.value = false
   }

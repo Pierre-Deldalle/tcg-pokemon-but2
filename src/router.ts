@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from './store/auth.store'
 
+import ConnexionPage from './pages/ConnexionPage.vue'
 import HomePage from './pages/HomePage.vue'
 import InscriptionPage from './pages/InscriptionPage.vue'
-import ConnexionPage from './pages/ConnexionPage.vue'
+import { useAuthStore } from './store/auth.store'
 
 export const ROUTES = {
   HOME: '/',
