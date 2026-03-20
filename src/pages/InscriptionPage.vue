@@ -48,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+import type { AxiosError } from 'axios'
 import { NAlert, NButton, NForm, NFormItem, NInput, NSpace } from 'naive-ui'
 import { ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
@@ -74,9 +75,9 @@ const handleSignUp = async () => {
     })
     router.push('/')
   } catch (error: unknown) {
+    const axiosError = error as AxiosError<{ message: string }>
     errorMessage.value =
-      error?.response?.data?.message ??
-      "Une erreur est survenue lors de l'inscription."
+      axiosError.response?.data?.message ?? 'Email ou mot de passe incorrect.'
   } finally {
     isLoading.value = false
   }

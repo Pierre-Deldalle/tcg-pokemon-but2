@@ -36,6 +36,8 @@
 </template>
 
 <script setup lang="ts">
+// Axios me permet de gérer les erreurs que unknow ne sait pas faire
+import type { AxiosError } from 'axios'
 import { NAlert, NButton, NForm, NFormItem, NInput, NSpace } from 'naive-ui'
 import { reactive, ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
@@ -63,8 +65,9 @@ const handleSignIn = async () => {
     })
     router.push('/')
   } catch (error: unknown) {
+    const axiosError = error as AxiosError<{ message: string }>
     errorMessage.value =
-      error?.response?.data?.message ?? 'Email ou mot de passe incorrect.'
+      axiosError.response?.data?.message ?? 'Email ou mot de passe incorrect.'
   } finally {
     isLoading.value = false
   }
