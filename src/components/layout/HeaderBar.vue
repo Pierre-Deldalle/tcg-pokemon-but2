@@ -1,5 +1,7 @@
 <template>
+  <!-- RG4 : visible uniquement si connecté -->
   <NLayoutHeader
+    v-if="isAuthenticated"
     bordered
     style="padding: 0 24px; position: sticky; top: 0; z-index: 100"
   >
@@ -26,13 +28,29 @@
         </NButton>
       </NSpace>
       <NSpace align="center" :size="16">
-        <NText depth="3">Renseigner le user connecté ici</NText>
-        <NButton size="small">Déconnexion</NButton>
+        <NText depth="3">{{ user?.username }}</NText>
+        <NButton size="small" @click="handleLogout">Déconnexion</NButton>
       </NSpace>
     </NSpace>
   </NLayoutHeader>
 </template>
 
 <script setup lang="ts">
+import { NButton, NLayoutHeader, NSpace, NText } from 'naive-ui'
+import { storeToRefs } from 'pinia'
+import { RouterLink, useRouter } from 'vue-router'
+
+import { ROUTES } from '@/router'
+import { useAuthStore } from '@/store/auth.store'
+
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL as string
+
+const authStore = useAuthStore()
+const { user, isAuthenticated } = storeToRefs(authStore)
+const router = useRouter()
+
+const handleLogout = () => {
+  authStore.logout()
+  router.push(ROUTES.CONNEXION)
+}
 </script>
